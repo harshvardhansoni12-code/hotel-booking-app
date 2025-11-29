@@ -6,6 +6,7 @@ import { Nunito } from "next/font/google";
 import NavBar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientlyOnly";
 import IsLoading from "./components/Loading";
+import Modal from "./components/modals/Modal";
 export const metadata: Metadata = {
   title: "Hotel Booking App",
   description: "this is hotel booking app clone by create next app",
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={font.className}>
         <IsLoading />
         <ClientOnly>
+          <Modal isOpen={true} title="hello world" />
           <NavBar />
         </ClientOnly>
         <br />

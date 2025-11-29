@@ -2,6 +2,9 @@
 
 /*
 This component ensures that its children are only rendered on the client side.
+It uses a state variable to track whether the component has been mounted on the client.
+If not mounted, it returns null to prevent server-side rendering issues.
+Once mounted, it renders its children.
 this component resolves hydration errors in Next.js applications.
 */
 import { useState, useEffect } from "react";
@@ -17,7 +20,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
   if (!isMounted) {
     return null;
   }
-  return <></>;
+  return <>{children}</>;
 };
 
 export default ClientOnly;

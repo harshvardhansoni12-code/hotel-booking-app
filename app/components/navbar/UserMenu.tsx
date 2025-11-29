@@ -97,15 +97,16 @@ const UserMenu = () => {
       text-sm
       "
         >
-          <div
-            className="
-          flex flex-col cursor-pointer
-          "
-          >
-            <>
-              <MenuItem />
-            </>
-          </div>
+          <>
+            <div className="hover:bg-neutral-100">
+              {" "}
+              <MenuItem onClick={() => {}} label="login" />
+            </div>
+            <div className="hover:bg-neutral-100">
+              {" "}
+              <MenuItem onClick={() => {}} label="Sign up" />
+            </div>
+          </>
         </div>
       )}
     </div>

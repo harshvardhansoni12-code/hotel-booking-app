@@ -95,10 +95,11 @@ const UserMenu = () => {
       right-0
       top-12
       text-sm
+      hover:cursor-pointer
       "
         >
           <>
-            <div className="hover:bg-neutral-100">
+            <div className="hover:cursor-pointer hover:bg-neutral-100">
               {" "}
               <MenuItem onClick={() => {}} label="login" />
             </div>

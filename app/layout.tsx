@@ -26,7 +26,12 @@ export default function RootLayout({
       <body className={font.className}>
         <IsLoading />
         <ClientOnly>
-          <Modal isOpen={true} title="hello world" />
+          <Modal
+            isOpen={true}
+            title="hello world"
+            actionLabel="action"
+            secondaryActionLabel={"reaction"}
+          />
           <NavBar />
         </ClientOnly>
         <br />

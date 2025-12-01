@@ -8,6 +8,7 @@ import ClientOnly from "./components/ClientlyOnly";
 import IsLoading from "./components/Loading";
 import Modal from "./components/modals/Modal";
 import RegisterModal from "./components/modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
 export const metadata: Metadata = {
   title: "Hotel Booking App",
   description: "this is hotel booking app clone by create next app",
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={font.className}>
         <IsLoading />
         <ClientOnly>
+          <ToasterProvider />
           <RegisterModal />
           <NavBar />
         </ClientOnly>

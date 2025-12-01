@@ -4,12 +4,13 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-
+import { toast } from "react-hot-toast";
 //
 import useRegisterModal from "../../hooks/useRegisterModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
+import Button from "../Button";
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -31,8 +32,9 @@ const RegisterModal = () => {
     try {
       await axios.post("/api/register", data);
       registerModal.onClose();
+      toast.success("signed up");
     } catch (error) {
-      console.log(error);
+      toast.error("something went wrong");
     } finally {
       () => {
         setIsLoading(false);
@@ -50,6 +52,36 @@ const RegisterModal = () => {
         register={register} // MUST be this
         errors={errors}
       />
+      <Input
+        id="name"
+        label="Name"
+        register={register} // MUST be this
+        errors={errors}
+      />
+      <Input
+        id="password"
+        label="password"
+        register={register} // MUST be this
+        errors={errors}
+      />
+    </div>
+  );
+
+  const footerContent = (
+    <div className="flex flex-col gap-4 m-3 ">
+      <hr />
+      <Button
+        outline
+        label="continue with Google"
+        icon={FcGoogle}
+        onClick={() => {}}
+      />
+      <Button
+        outline
+        label="continue with Github"
+        icon={AiFillGithub}
+        onClick={() => {}}
+      />
     </div>
   );
   return (
@@ -61,6 +93,7 @@ const RegisterModal = () => {
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
+      footer={footerContent}
     />
   ); //action label required
 };

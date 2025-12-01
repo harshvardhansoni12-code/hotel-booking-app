@@ -98,7 +98,6 @@ const Modal: React.FC<ModalProps> = ({
 
         "
         >
-          //content
           <div
             className={`
             translate

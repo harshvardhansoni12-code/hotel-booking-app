@@ -44,7 +44,12 @@ const RegisterModal = () => {
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading title={"Welcome to airbnb"} subtitle="create an account!" />
-      <Input />
+      <Input
+        id="email"
+        label="Email"
+        register={register} // MUST be this
+        errors={errors}
+      />
     </div>
   );
   return (

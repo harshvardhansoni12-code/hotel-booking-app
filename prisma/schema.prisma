@@ -26,7 +26,7 @@ model User{
 
  accounts Account[]
  listings Listing[]
- reservations reservation[]
+ reservations Reservation[]
 }
 
 model Account{
@@ -59,4 +59,18 @@ model Listing{
   locationValue String
   userId String 
   user User @relation(fields :[userId] , references: [id] , onDelete: Cascade)
+  reservations Reservation[]
+}
+
+model Reservation{
+  id String @id @default(uuid())
+  userId String
+  listingId String
+  startDate DateTime
+  endDate DateTime
+  totalPrice Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields:[userId] , references:[id] , onDelete: Cascade)
+  listing Listing @relation(fields:[listingId] , references: [id] , onDelete: Cascade)
 }

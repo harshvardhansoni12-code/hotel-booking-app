@@ -11,5 +11,37 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
 
+model User{
+ id String @id @default(uuid())
+ name String?
+ email String? @unique
+ emailVerified DateTime?
+ image String?
+ hashedPassword String?
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+ favouriteIds String @default(uuid())
+
+ accounts Account[]
+ listings Listing[]
+ reservations reservation[]
+}
+
+model Account{
+  id String @id @default(uuid())
+  userId String 
+  user User @relation(fields: [userId] , references: [id])
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? 
+  access_token String?
+  expires_at Int?
+  token_type String?
+  scope String
+  id_token String?
+  session_state String?
+  @@unique([provider, providerAccountId])
 }

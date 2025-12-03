@@ -7,7 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import prisma from "@/app/libs/prismadb";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { toast } from "react-hot-toast";
+//import { toast } from "react-hot-toast";
 //
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -39,7 +39,6 @@ export const authOptions: AuthOptions = {
         });
         if (!user || !user?.hashedPassword) {
           throw new Error("user not exist please sign up!");
-          toast.error("user not exist!");
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -48,7 +47,6 @@ export const authOptions: AuthOptions = {
         );
         if (!isCorrectPassword) {
           throw new Error("wrong password");
-          toast.error("wrong password!");
         }
         return user;
       },

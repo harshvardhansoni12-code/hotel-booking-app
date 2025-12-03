@@ -28,8 +28,8 @@ const RegisterModal = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       await axios.post("/api/register", data);
       registerModal.onClose();
       toast.success("signed up");

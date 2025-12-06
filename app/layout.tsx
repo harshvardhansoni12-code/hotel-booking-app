@@ -7,6 +7,7 @@ import NavBar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientlyOnly";
 import IsLoading from "./components/Loading";
 import Modal from "./components/modals/Modal";
+import LoginModal from "./components/modals/LoginModal";
 import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({
         <ClientOnly>
           <ToasterProvider />
           <RegisterModal />
+          <LoginModal />
           <NavBar />
         </ClientOnly>
         <br />

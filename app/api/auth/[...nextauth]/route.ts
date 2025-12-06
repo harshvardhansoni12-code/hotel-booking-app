@@ -1,15 +1,13 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import NextAuth, {
-  AuthOptions,
-  Awaitable,
-  RequestInternal,
-  User,
-} from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "@/app/libs/prismadb";
-import Credentials from "next-auth/providers/credentials";
-import { CgPassword } from "react-icons/cg";
+import { NextResponse } from "next/server";
+import bcrypt from "bcrypt";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { error } from "console";
+import { read } from "fs";
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers,
@@ -23,7 +21,7 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
-    Credentials({
+    CredentialsProvider({
       name: "credentials",
       credentials: {
         email: {
@@ -35,15 +33,43 @@ export const authOptions: AuthOptions = {
           type: "text",
         },
       },
-      authorize: function (
-        credentials: Record<"email", string> | undefined,
-        req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
-      ): Awaitable<User | null> {
-        throw new Error("Function not implemented.");
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("invalid credentials");
+        }
+        try {
+          const userFound = await prisma.user.findUnique({
+            where: {
+              email: credentials?.email,
+            },
+          });
+          if (!userFound || !userFound.hashedPassword) {
+            throw new Error("user not found");
+          }
+          const realPassword = await bcrypt.compare(
+            credentials.password,
+            userFound.hashedPassword
+          );
+          if (!realPassword) {
+            throw new Error("incorrect password");
+          }
+          return userFound;
+        } catch (error) {
+          throw new Error("user not found please sign up first!");
+        }
       },
     }),
   ],
+  pages: {
+    signIn: "/",
+  },
+  debug: process.env.NODE_ENV === "development",
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
+
 //1:59

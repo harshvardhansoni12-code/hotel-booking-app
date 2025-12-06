@@ -36,9 +36,7 @@ const RegisterModal = () => {
     } catch (error) {
       toast.error("something went wrong");
     } finally {
-      () => {
-        setIsLoading(false);
-      };
+      setIsLoading(false);
     }
   };
   // this is the body content of modal

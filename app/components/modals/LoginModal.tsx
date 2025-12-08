@@ -1,20 +1,25 @@
 "use client";
+import { signIn } from "next-auth/react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { use, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 //
-import useLoginModal from "../../hooks/useLoginModal";
+
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import Button from "../Button";
+
+import useLoginModal from "../../hooks/useLoginModal";
 import useRegisterModal from "../../hooks/useRegisterModal";
 const LoginModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -30,16 +35,19 @@ const LoginModal = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    try {
-      setIsLoading(true);
-      await axios.post("/api/auth", data);
-      registerModal.onClose();
-      toast.success("signed up");
-    } catch (error) {
-      toast.error("something went wrong");
-    } finally {
+    setIsLoading(true);
+    signIn("credentials", { ...data, redirect: false }).then((callback) => {
       setIsLoading(false);
-    }
+      if (callback?.ok) {
+        toast.success("logged in");
+        router.refresh();
+        loginModal.onClose();
+      }
+
+      if (callback?.error) {
+        toast.error("callback.error");
+      }
+    });
   };
   // this is the body content of modal
   //here we will make input fields for email name password
@@ -49,12 +57,6 @@ const LoginModal = () => {
       <Input
         id="email"
         label="Email"
-        register={register} // MUST be this
-        errors={errors}
-      />
-      <Input
-        id="name"
-        label="Name"
         register={register} // MUST be this
         errors={errors}
       />

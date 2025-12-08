@@ -32,7 +32,7 @@ const LoginModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       setIsLoading(true);
-      await axios.post("/api/register", data);
+      await axios.post("/api/auth", data);
       registerModal.onClose();
       toast.success("signed up");
     } catch (error) {
@@ -103,7 +103,10 @@ const LoginModal = () => {
           cursor-pointer
           hover:underline
           "
-            onClick={registerModal.onClose}
+            onClick={() => {
+              registerModal.onOpen();
+              loginModal.onClose();
+            }}
           >
             sign up!
           </div>
@@ -125,6 +128,4 @@ const LoginModal = () => {
   ); //action label required
 };
 
-//1:06:42
 export default LoginModal;
-//1:35:38

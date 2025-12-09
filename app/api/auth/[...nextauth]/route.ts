@@ -68,6 +68,7 @@ export const authOptions: AuthOptions = {
 };
 
 //1:59
+
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

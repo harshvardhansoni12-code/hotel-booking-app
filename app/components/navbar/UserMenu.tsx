@@ -6,7 +6,12 @@ import Avatar from "./Avatar";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
-const UserMenu = () => {
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
+interface UserMenuProps {
+  currentUser?: User | null;
+}
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
@@ -101,21 +106,57 @@ const UserMenu = () => {
       hover:cursor-pointer
       "
         >
-          <>
-            <div className="hover:cursor-pointer hover:bg-neutral-100">
-              {" "}
-              <MenuItem onClick={loginModal.onOpen} label="login" />
-            </div>
-            <div className="hover:bg-neutral-100">
-              {" "}
-              <MenuItem
-                onClick={() => {
-                  registerModal.onOpen();
-                }}
-                label="Sign up"
-              />
-            </div>
-          </>
+          <div className="flex flex-col ">
+            {currentUser ? (
+              <>
+                <div className="hover:cursor-pointer hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem onClick={() => {}} label="My trips" />
+                </div>
+                <div className="hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem onClick={() => {}} label="My reservations" />
+                </div>
+                <div className="hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem onClick={() => {}} label="My favourites" />
+                </div>
+                <div className="hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem onClick={() => {}} label="My Properties" />
+                </div>
+                <div className="hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem onClick={() => {}} label="Airbnb My Home" />
+                </div>
+                <div className="hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem
+                    onClick={() => {
+                      signOut();
+                    }}
+                    label="Log Out"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="hover:cursor-pointer hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem onClick={loginModal.onOpen} label="login" />
+                </div>
+                <div className="hover:bg-neutral-100">
+                  {" "}
+                  <MenuItem
+                    onClick={() => {
+                      registerModal.onOpen();
+                    }}
+                    label="Sign up"
+                  />
+                </div>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>

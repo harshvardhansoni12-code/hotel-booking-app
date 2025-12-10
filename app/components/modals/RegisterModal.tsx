@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 //
-
+import { signIn } from "next-auth/react";
 import useRegisterModal from "../../hooks/useRegisterModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
@@ -81,7 +81,7 @@ const RegisterModal = () => {
         outline
         label="continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div
         className="

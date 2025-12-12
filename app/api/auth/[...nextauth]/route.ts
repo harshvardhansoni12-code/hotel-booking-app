@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/",
   },
-  debug: process.env.NODE_ENV === "development",
+  debug: false,
   session: {
     strategy: "jwt",
   },
@@ -72,3 +72,4 @@ export const authOptions: AuthOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
+//

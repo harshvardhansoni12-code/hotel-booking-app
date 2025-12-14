@@ -1,10 +1,10 @@
 import { GiWindmill } from "react-icons/gi";
 import Container from "../Container";
-import { TbBeach } from "react-icons/tb";
+import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import { MdOutlineVilla } from "react-icons/md";
 
 import CategoryBox from "../CategoryBox";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 export const categories = [
   {
     label: "Beach",
@@ -21,9 +21,26 @@ export const categories = [
     icon: MdOutlineVilla,
     description: "this property has Villas",
   },
+  {
+    label: "CountrySide",
+    icon: TbMountain,
+    description: "this property is near mountains",
+  },
+  {
+    label: "Pools",
+    icon: TbPool,
+    description: "this property has pools",
+  },
 ];
 const Categories = () => {
   const params = useSearchParams();
+  const category = params?.get("category");
+  const pathname = usePathname();
+  const isMainPage = pathname === "/";
+
+  if (!isMainPage) {
+    return null;
+  }
   return (
     <Container>
       <div

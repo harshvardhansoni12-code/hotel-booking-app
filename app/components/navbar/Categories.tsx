@@ -4,6 +4,7 @@ import { TbBeach } from "react-icons/tb";
 import { MdOutlineVilla } from "react-icons/md";
 
 import CategoryBox from "../CategoryBox";
+import { useSearchParams } from "next/navigation";
 export const categories = [
   {
     label: "Beach",
@@ -22,6 +23,7 @@ export const categories = [
   },
 ];
 const Categories = () => {
+  const params = useSearchParams();
   return (
     <Container>
       <div

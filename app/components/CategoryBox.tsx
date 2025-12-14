@@ -41,7 +41,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     );
 
     router.push(url);
-  }, []);
+  }, [label, params, router]);
   return (
     <div
       className={`

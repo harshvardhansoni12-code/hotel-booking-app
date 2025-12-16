@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { use, useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -21,6 +21,9 @@ const LoginModal = () => {
   const loginModal = useLoginModal();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const toggle = useCallback(() => {
+    registerModal.onOpen, loginModal.onClose;
+  }, [loginModal, registerModal]);
 
   const {
     register,
@@ -105,10 +108,7 @@ const LoginModal = () => {
           cursor-pointer
           hover:underline
           "
-            onClick={() => {
-              registerModal.onOpen();
-              loginModal.onClose();
-            }}
+            onClick={toggle}
           >
             sign up!
           </div>

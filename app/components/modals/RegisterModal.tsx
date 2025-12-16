@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import useRegisterModal from "../../hooks/useRegisterModal";
 import Modal from "./Modal";
+
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import Button from "../Button";
@@ -18,6 +19,10 @@ const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
   const loginModal = useLoginModal();
+
+  const toggle = useCallback(() => {
+    loginModal.onOpen, registerModal.onClose;
+  }, [loginModal, registerModal]);
   const {
     register,
     handleSubmit,
@@ -104,10 +109,7 @@ const RegisterModal = () => {
           hover:underline
 
           "
-            onClick={() => {
-              loginModal.onOpen();
-              registerModal.onClose();
-            }}
+            onClick={toggle}
           >
             Log in!
           </div>

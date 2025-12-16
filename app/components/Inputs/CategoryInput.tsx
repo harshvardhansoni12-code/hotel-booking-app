@@ -1,6 +1,7 @@
 "use client";
 
 import { IconType } from "react-icons";
+import { categories } from "../navbar/Categories";
 
 interface CategoriesInputProps {
   onClick: (value: string) => void;
@@ -17,11 +18,25 @@ const CategoriesInput: React.FC<CategoriesInputProps> = ({
 }) => {
   return (
     <div
-      className={""}
       onClick={() => {
         onClick(label);
       }}
-    ></div>
+      className={`
+        rounded-xl
+        border-2
+        p-4
+        flex
+        flex-col
+        gap-3
+        hover:border-black
+        transition
+        cursor-pointer
+        ${selected ? "border=black" : "border-neutral-200"}
+        `}
+    >
+      <Icon size={30} />
+      <div className="font-semibold">{label}</div>
+    </div>
   );
 };
 

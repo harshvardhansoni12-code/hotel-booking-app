@@ -1,4 +1,5 @@
-import { GiWindmill } from "react-icons/gi";
+"use client";
+import { GiBoatFishing, GiIsland, GiWindmill } from "react-icons/gi";
 import Container from "../Container";
 import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import { MdOutlineVilla } from "react-icons/md";
@@ -30,6 +31,16 @@ export const categories = [
     label: "Pools",
     icon: TbPool,
     description: "this property has pools",
+  },
+  {
+    label: "Islands",
+    icon: GiIsland,
+    description: "this property is on an island",
+  },
+  {
+    label: "lakes",
+    icon: GiBoatFishing,
+    description: "this property is near lakes",
   },
 ];
 const Categories = () => {
@@ -68,3 +79,4 @@ const Categories = () => {
 };
 
 export default Categories;
+////3:10:_ _ _ _

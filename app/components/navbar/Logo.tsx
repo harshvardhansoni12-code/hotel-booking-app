@@ -1,9 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
 const Logo = () => {
   const router = useRouter();
 
+  const homePage = () => {
+    router.push("/");
+  };
   return (
     <Image
       alt="Logo"
@@ -11,6 +15,7 @@ const Logo = () => {
       width={100}
       height={100}
       src="/images/Logo.png"
+      onClick={homePage}
     />
   );
 };

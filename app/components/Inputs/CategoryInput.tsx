@@ -1,8 +1,6 @@
 "use client";
 
 import { IconType } from "react-icons";
-import { categories } from "../navbar/Categories";
-
 interface CategoriesInputProps {
   onClick: (value: string) => void;
   icon: IconType;
@@ -31,7 +29,7 @@ const CategoriesInput: React.FC<CategoriesInputProps> = ({
         hover:border-black
         transition
         cursor-pointer
-        ${selected ? "border=black" : "border-neutral-200"}
+        ${selected ? "border-black" : "border-neutral-200"}
         `}
     >
       <Icon size={30} />

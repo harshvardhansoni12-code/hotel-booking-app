@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoriesInput from "../Inputs/CategoryInput";
+import { FieldValues, useForm } from "react-hook-form";
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
@@ -18,6 +19,35 @@ const RentModal = () => {
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm<FieldValues>({
+    defaultValues: {
+      category: "",
+      location: null,
+      guestCount: 1,
+      roomCount: 1,
+      bnathroomCount: 1,
+      imageSrc: "",
+      price: 1,
+      title: "",
+      description: "",
+    },
+  });
+
+  const category = watch("category");
+  const setCustomValues = (id: string, value: any) => {
+    setValue(id, value, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  };
   const onBack = () => {
     setStep((value) => value - 1);
   };
@@ -76,6 +106,7 @@ const RentModal = () => {
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
       onSubmit={rentModal.onClose}
+      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       title="Airbnb your home"
       body={body}
     />

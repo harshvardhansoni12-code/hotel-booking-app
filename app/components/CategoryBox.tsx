@@ -1,7 +1,7 @@
 "use client";
 
 import { IconType } from "react-icons";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import qs from "query-string";
 
@@ -59,7 +59,6 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   cursor-pointer
   ${selected ? "border-b-neutral-800" : "border-transparent"}
   ${selected ? "text-neutral-800" : "text-neutral-500"}
-  ${selected ? "bg-neutral-800" : ""}
   `}
     >
       <Icon size={26} />

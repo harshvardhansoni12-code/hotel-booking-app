@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
+import CountrySelect from "../Inputs/CountrySelect";
 import { categories } from "../navbar/Categories";
 import CategoriesInput from "../Inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
@@ -71,7 +72,7 @@ const RentModal = () => {
     return "Back";
   }, [step]);
 
-  let body = (
+  let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
         title={"Which of these best describe your place"}
@@ -101,16 +102,27 @@ const RentModal = () => {
     </div>
   );
 
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="where is your place located"
+          subtitle="help guests find you"
+        />
+        <CountrySelect />
+      </div>
+    );
+  }
   return (
     <Modal
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
+      onSubmit={onNext}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       title="Airbnb your home"
-      body={body}
+      body={bodyContent}
     />
   );
 };

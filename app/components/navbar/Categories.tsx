@@ -61,9 +61,7 @@ const Categories = () => {
   flex-row
   items-center
   justify-between
-  overflown-x-auto
-
-  "
+  overflown-x-auto"
       >
         {categories.map((item) => (
           <CategoryBox

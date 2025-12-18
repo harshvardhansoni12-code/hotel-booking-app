@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, use } from "react";
+import { useState, useMemo } from "react";
 import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
 import Heading from "../Heading";
@@ -32,7 +32,7 @@ const RentModal = () => {
       location: null,
       guestCount: 1,
       roomCount: 1,
-      bnathroomCount: 1,
+      bathroomCount: 1,
       imageSrc: "",
       price: 1,
       title: "",
@@ -91,7 +91,7 @@ const RentModal = () => {
               onClick={(category) => {
                 setCustomValues("category", category);
               }}
-              selected={false}
+              selected={category === items.label}
               label={items.label}
               icon={items.icon}
             />

@@ -7,7 +7,7 @@ import CountrySelect from "../Inputs/CountrySelect";
 import { categories } from "../navbar/Categories";
 import CategoriesInput from "../Inputs/CategoryInput";
 import { CountrySelectValue } from "../Inputs/CountrySelect";
-
+import Counter from "../Inputs/Counter";
 import { FieldValues, useForm } from "react-hook-form";
 enum STEPS {
   CATEGORY = 0,
@@ -127,6 +127,34 @@ const RentModal = () => {
         <CountrySelect
           value={location}
           onChange={(value) => setCustomValues("location", value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading title="Information about your place" subtitle="add info" />
+        <Counter />
+      </div>
+    );
+  }
+
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading title="Image of your location" subtitle="add image url" />
+      </div>
+    );
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add description of your location"
+          subtitle="add Description"
         />
       </div>
     );

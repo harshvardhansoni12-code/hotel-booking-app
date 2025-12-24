@@ -6,6 +6,8 @@ import Heading from "../Heading";
 import CountrySelect from "../Inputs/CountrySelect";
 import { categories } from "../navbar/Categories";
 import CategoriesInput from "../Inputs/CategoryInput";
+import { CountrySelectValue } from "../Inputs/CountrySelect";
+
 import { FieldValues, useForm } from "react-hook-form";
 enum STEPS {
   CATEGORY = 0,
@@ -14,6 +16,17 @@ enum STEPS {
   IMAGES = 3,
   DESCRIPTION = 4,
   PRICE = 5,
+}
+interface RentFormValues {
+  category: string;
+  location: CountrySelectValue | null;
+  guestCount: number;
+  roomCount: number;
+  bathroomCount: number;
+  imageSrc: string;
+  price: number;
+  title: string;
+  description: string;
 }
 
 const RentModal = () => {
@@ -42,6 +55,8 @@ const RentModal = () => {
   });
 
   const category = watch("category");
+  const location = watch("location");
+
   const setCustomValues = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -109,7 +124,10 @@ const RentModal = () => {
           title="where is your place located"
           subtitle="help guests find you"
         />
-        <CountrySelect />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValues("location", value)}
+        />
       </div>
     );
   }

@@ -58,6 +58,8 @@ const RentModal = () => {
   const category = watch("category");
   const location = watch("location");
   const guestCount = watch("guestCount");
+  const roomCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
   const setCustomValues = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -137,11 +139,26 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading title="Information about your place" subtitle="add info" />
+        <hr />
         <Counter
           title={"Guests"}
           subtitle={"enter no of guests"}
           value={guestCount}
           onChange={(value) => setCustomValues("guestCount", value)}
+        />
+        <hr />
+        <Counter
+          title={"Rooms"}
+          subtitle={"enter no of Rooms"}
+          value={roomCount}
+          onChange={(value) => setCustomValues("roomCount", value)}
+        />
+        <hr />
+        <Counter
+          title={"Bathrooms"}
+          subtitle={"enter no of Bathrooms"}
+          value={bathroomCount}
+          onChange={(value) => setCustomValues("bathroomCount", value)}
         />
       </div>
     );
@@ -181,3 +198,4 @@ const RentModal = () => {
 
 export default RentModal;
 ////////3:38:00
+/////////4:17:00

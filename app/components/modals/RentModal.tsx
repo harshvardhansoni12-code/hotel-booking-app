@@ -57,7 +57,7 @@ const RentModal = () => {
 
   const category = watch("category");
   const location = watch("location");
-
+  const guestCount = watch("guestCount");
   const setCustomValues = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -138,9 +138,9 @@ const RentModal = () => {
       <div className="flex flex-col gap-8">
         <Heading title="Information about your place" subtitle="add info" />
         <Counter
-          title={"number of guests"}
+          title={"Guests"}
           subtitle={"enter no of guests"}
-          value={watch("guestCount")}
+          value={guestCount}
           onChange={(value) => setCustomValues("guestCount", value)}
         />
       </div>

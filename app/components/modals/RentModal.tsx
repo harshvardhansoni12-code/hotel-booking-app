@@ -9,6 +9,7 @@ import CategoriesInput from "../Inputs/CategoryInput";
 import { CountrySelectValue } from "../Inputs/CountrySelect";
 import Counter from "../Inputs/Counter";
 import { FieldValues, useForm } from "react-hook-form";
+import Input from "../Inputs/Input";
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
@@ -136,7 +137,12 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading title="Information about your place" subtitle="add info" />
-        <Counter />
+        <Counter
+          title={"number of guests"}
+          subtitle={"enter no of guests"}
+          value={watch("guestCount")}
+          onChange={(value) => setCustomValues("guestCount", value)}
+        />
       </div>
     );
   }

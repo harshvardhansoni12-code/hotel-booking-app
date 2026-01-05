@@ -9,6 +9,7 @@ import CategoriesInput from "../Inputs/CategoryInput";
 import { CountrySelectValue } from "../Inputs/CountrySelect";
 import Counter from "../Inputs/Counter";
 import { FieldValues, useForm } from "react-hook-form";
+import ImageUpload from "../Inputs/ImageUpload";
 import Input from "../Inputs/Input";
 enum STEPS {
   CATEGORY = 0,
@@ -168,6 +169,7 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading title="Image of your location" subtitle="add image url" />
+        <ImageUpload />
       </div>
     );
   }

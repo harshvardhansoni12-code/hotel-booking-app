@@ -34,7 +34,7 @@ interface RentFormValues {
 const RentModal = () => {
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
-
+  const [IsLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -169,7 +169,12 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading title="Image of your location" subtitle="add image url" />
-        <ImageUpload />
+        <ImageUpload
+          onChange={function (value: string): void {
+            throw new Error("Function not implemented.");
+          }}
+          value={""}
+        />
       </div>
     );
   }
@@ -181,9 +186,45 @@ const RentModal = () => {
           title="Add description of your location"
           subtitle="add Description"
         />
+        <Input
+          id="title"
+          label="Title"
+          disabled={IsLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="description"
+          label="Description"
+          disabled={IsLoading}
+          register={register}
+          errors={errors}
+          required
+        />
       </div>
     );
   }
+
+  if (step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Set price for your place"
+          subtitle="How much do you want to charge?"
+        />
+        <Input
+          id="price"
+          label="Price"
+          disabled={IsLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+  }
+
   return (
     <Modal
       actionLabel={actionLabel}

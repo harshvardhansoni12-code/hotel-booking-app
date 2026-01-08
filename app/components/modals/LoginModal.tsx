@@ -53,10 +53,10 @@ const LoginModal = () => {
     });
   };
   // this is the body content of modal
-  //here we will make input fields for email name password
+  //here we will make input fields for email password
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title={"Welcome to airbnb"} subtitle="create an account!" />
+      <Heading title={"Welcome to airbnb"} subtitle="Log in to your account!" />
       <Input
         id="email"
         label="Email"

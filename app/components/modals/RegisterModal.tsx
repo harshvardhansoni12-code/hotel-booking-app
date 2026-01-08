@@ -49,6 +49,7 @@ const RegisterModal = () => {
   };
   // this is the body content of modal
   //here we will make input fields for email name password
+  //
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading title={"Welcome to airbnb"} subtitle="create an account!" />
